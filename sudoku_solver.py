@@ -13,15 +13,13 @@ board = [
 
 def valid(x, y, number):
 	for i in range(0, 9):
-		if (board[x][i] == number and x != i) or (board[i][y] == number and y != i):
+		if board[x][i] == number or board[i][y] == number:
 			return False
-
 	box_x = x // 3
 	box_y = y // 3
-
 	for i in range(box_x*3, box_x*3+3):
 		for j in range(box_y*3, box_y*3+3):
-			if board[i][j] == number and i != x and j != y:
+			if board[i][j] == number:
 				return False
 	return True
 
@@ -69,5 +67,7 @@ def main(x, y, last):
 
 last = find_last_solver()
 if last:
-	main(0,0,last)
-print_board(board)
+	if main(0,0,last):
+		print_board(board)
+	else:
+		print("Not possible to solve")
